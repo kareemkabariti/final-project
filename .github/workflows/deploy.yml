@@ -1,0 +1,48 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Check Docker
+        run: docker --version
+
+      - name: Check Docker Compose
+        run: docker compose version
+
+      - name: Start Vault
+        run: |
+          cd vault
+          docker compose up -d
+
+      - name: Wait for Vault
+        run: |
+          sleep 10
+          curl --fail http://localhost:8200/v1/sys/health
+
+      - name: Deploy application
+        run: |
+          cd app
+          docker compose up -d --build
+
+      - name: Check running containers
+        run: docker ps
+
+      - name: Test backend health
+        run: |
+          sleep 10
+          curl --fail http://localhost:5000/health
+
+      - name: Test backend API
+        run: |
+          curl --fail http://localhost:5000/api/message

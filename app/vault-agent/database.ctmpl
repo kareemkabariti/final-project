@@ -1,0 +1,5 @@
+{{ with secret "secret/data/app/database" }}
+DB_USER="{{ .Data.data.DB_USER }}"
+DB_PASS="{{ .Data.data.DB_PASS }}"
+DB_NAME="{{ .Data.data.DB_NAME }}"
+{{ end }}

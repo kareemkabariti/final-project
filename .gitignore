@@ -1,0 +1,13 @@
+.env
+*.env
+
+app/vault-token/
+app/.env
+
+vault/data/
+
+__pycache__/
+*.pyc
+
+.venv/
+venv/
