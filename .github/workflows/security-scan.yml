@@ -28,10 +28,9 @@ jobs:
 
 
     - name: Hadolint Dockerfile Scan
-      uses: hadolint/hadolint-action@v3
+      uses: hadolint/hadolint-action@v3.1.0
       with:
         dockerfile: backend/Dockerfile
-
 
     - name: Build Backend Image
       run: |
