@@ -17,8 +17,6 @@ jobs:
 
       - name: Install Python Tools
         run: |
-          sudo apt update
-          sudo apt install python3-pip -y
           python3 -m pip install bandit --break-system-packages
 
 
@@ -55,7 +53,7 @@ jobs:
           docker build -t secure-frontend ./frontend
 
 
-      - name: Trivy Backend Scan
+      - name: Trivy Backend Image Scan
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: secure-backend
@@ -63,10 +61,10 @@ jobs:
           exit-code: 0
 
 
-      - name: Trivy Frontend Scan
+      - name: Trivy Frontend Image Scan
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: secure-frontend
+          image-ref: secure-front-end
           severity: HIGH,CRITICAL
           exit-code: 0
 
