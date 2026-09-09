@@ -15,11 +15,10 @@ jobs:
       uses: actions/checkout@v4
 
 
-    - name: Bandit Python Scan
-      run: |
-        pip install bandit
-        bandit -r backend || true
-
+- name: Bandit Python Security Scan
+  run: |
+    python3 -m pip install bandit
+    bandit -r backend || true
 
     - name: TruffleHog Secret Scan
       uses: trufflesecurity/trufflehog@main
