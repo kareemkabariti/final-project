@@ -54,3 +54,11 @@ jobs:
       with:
         image-ref: secure-frontend
         severity: HIGH,CRITICAL
+
+- name: Run Trivy vulnerability scanner
+  uses: aquasecurity/trivy-action@master
+  with:
+    image-ref: 'postgres:9.6'
+    format: 'table'
+    exit-code: '0'
+    severity: 'CRITICAL,HIGH'
