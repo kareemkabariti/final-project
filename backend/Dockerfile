@@ -4,7 +4,10 @@ WORKDIR /app
 
 COPY app.py .
 
-RUN pip install flask flask-cors psycopg2-binary
+RUN pip install --no-cache-dir \
+    flask==3.0.3 \
+    flask-cors==4.0.1 \
+    psycopg2-binary==2.9.9
 
 EXPOSE 5000
 
