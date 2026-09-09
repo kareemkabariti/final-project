@@ -64,26 +64,6 @@ jobs:
       - name: Trivy Frontend Image Scan
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: secure-front-end
+          image-ref: secure-frontend
           severity: HIGH,CRITICAL
           exit-code: 0
-
-
-      - name: Deploy Backend
-        run: |
-          docker stop backend || true
-          docker rm backend || true
-          docker run -d \
-            --name backend \
-            -p 5000:5000 \
-            secure-backend
-
-
-      - name: Deploy Frontend
-        run: |
-          docker stop frontend || true
-          docker rm frontend || true
-          docker run -d \
-            --name frontend \
-            -p 8080:80 \
-            secure-frontend
